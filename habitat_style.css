@@ -1,0 +1,28 @@
+.habitat {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.habitat div {
+    cursor: pointer;
+}
+
+.habitat img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid #333;
+}
+
+.info-section {
+    display: none;
+    padding: 20px;
+    border-top: 2px solid #333;
+}
+
+.info-section.active {
+    display: block;
+}

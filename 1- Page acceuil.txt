@@ -1,0 +1,26 @@
+1- Page acceuil
+	- Présentation du zoo
+	- Différents habitats, services et animaux du zoo
+	- Avis du Zoo
+
+2- Menu
+	- Retour vers page acceuil
+	- Accès à tout les services
+	- Accès à tous les habitats
+	- Connexion
+	- Contact
+
+3- Vue globale de tout les services (fait apres le menu et page d'acceuil)
+
+4- Vue globale des habitats
+	- Habitat: un nom, une ou plusieurs images, une descrition et la liste des animaux
+	- Animal: un Prénom, une Race, une ou plusieurs images, et son habitat
+
+	- Le vétérinaire peut modifier l'état de l'animal, sa nourriture, le grammage de la 	  nourriture, sa date de passage et un détail sur l'état de l'animal (non 	 	  obligatoire)
+
+5- Avis
+
+6- Espace administrateur 
+	- Création de compte employé et vétérinaire
+	- Modifier les services, horaires, habitat et animaux du zoo
+	-

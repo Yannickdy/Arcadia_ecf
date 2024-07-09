@@ -1,0 +1,113 @@
+body {
+  width: 100%;
+}
+
+.principal {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0.5rem auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+.texte_presentation img {
+  width: 10rem;
+  height: 14rem;
+  margin: 0 1rem 0 0;
+  border: 5px solid rgb(233, 171, 88);
+  border-radius: 5px;
+}
+
+.texte_presentation {
+  display: flex;
+  align-items: center;
+
+}
+
+.habitat, .animaux {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+p {
+  text-align: justify;
+  color: #555;
+}
+
+.habitat, .animaux {
+  max-width: 100%;
+}
+
+.habitatgrid, .animauxgrid {
+  max-width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 10px;
+  box-sizing: border-box;
+}
+
+.habitatgrid > div, .animauxgrid > div {
+  border: 2px solid rgb(233, 171, 88);
+  border-radius: 5px;
+  background-color: rgba(233, 171, 88, 0.5);
+  padding: 1em;
+  color: #d9480f;
+  text-align: center;
+}
+
+.habitatgrid img, .animauxgrid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.habitsavane {
+  grid-column: span 1;
+}
+
+.habitforet {
+  grid-column: span 1;
+}
+
+.prairie {
+  grid-column: span 1;
+}
+
+.habittoundra {
+  grid-column: span 1;
+}
+
+.koala {
+  grid-column: span 1;
+}
+
+.quokka {
+  grid-column: span 1;
+}
+
+.wombat {
+  grid-column: span 1;
+}
+
+.taz {
+  grid-column: span 1;
+}
+
+.kangorou {
+  grid-column: span 1;
+}

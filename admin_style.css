@@ -1,0 +1,4 @@
+.inline {
+  display: inline; /* ou display: inline-block; */
+  margin: 0; /* Optionnel : supprime les marges par défaut */
+}
