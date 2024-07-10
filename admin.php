@@ -55,18 +55,26 @@ if(isset($_POST['envoi'])) {
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <div class="header_container">
-            <div class="logo"><a href="index.php"><img src="logo.png" alt="logo"></a></div>
-            <div class="principale">
-                <a href="index.php">Accueil</a>
-                <a href="habitat.php">Habitat</a>
-                <a href="animaux.php">Animaux</a>
-                <a href="services.php">Services</a>
-                <a href="avis.php">Avis</a>
+<header>
+                <div class="header_container">
+                    <div class="logo"><a href="index.php"><img src="logo.png" alt="logo"></a></div>
+    
+                    <div class="principale">
+                    <a href="index.php">Acceuil</a>
+                    <a href="habitat.php">Habitat</a>
+                    <a href="animaux.php">Animaux</a>
+                    <a href="services.php">Services</a>
+                    <a href="avis.php">Avis</a>
+                    </div>
+            
+                <div class="utilisateur">
+                    <a href="connexion.php"> connexion</a>
+                    <a href="inscription.php">inscription</a>
+                </div>
+                <div class="adminl">
+                    <
             </div>
-        </div>
-    </header>
+        </header>
 
     <main>
         <?php

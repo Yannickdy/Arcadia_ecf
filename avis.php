@@ -16,8 +16,8 @@ if (isset($_POST['submit'])) {
         $email = htmlspecialchars($_POST['email']);
         $avis = htmlspecialchars($_POST['avis']);
 
-        $stmt = $bdd->prepare('INSERT INTO avis (pseudo, email, avis) VALUES (?, ?, ?)');
-        $stmt->execute(array($pseudo, $email, $avis));
+        $recupAvis = $bdd->prepare('INSERT INTO avis (pseudo, email, avis) VALUES (?, ?, ?)');
+        $recupAvis->execute(array($pseudo, $email, $avis));
 
         echo "<p>Votre avis a été soumis.</p>";
     } else {
@@ -26,9 +26,9 @@ if (isset($_POST['submit'])) {
 }
 
 // Récupération et affichage des avis approuvés
-$stmt = $bdd->prepare('SELECT pseudo, avis FROM avis WHERE approuve = 1');
-$stmt->execute();
-$avisApprouves = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$recupAvis = $bdd->prepare('SELECT pseudo, avis FROM avis WHERE approuve = 1');
+$recupAvis->execute();
+$avisApprouves = $recupAvis->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -38,29 +38,49 @@ $avisApprouves = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Avis</title>
 </head>
 <body>
+    <header>
+                <div class="header_container">
+                    <div class="logo"><a href="index.php"><img src="logo.png" alt="logo"></a></div>
+    
+                    <div class="principale">
+                    <a href="index.php">Acceuil</a>
+                    <a href="habitat.php">Habitat</a>
+                    <a href="animaux.php">Animaux</a>
+                    <a href="services.php">Services</a>
+                    <a href="avis.php">Avis</a>
+                    </div>
+            
+                <div class="utilisateur">
+                    <a href="connexion.php"> connexion</a>
+                    <a href="inscription.php">inscription</a>
+                </div>
+            </div>
+        </header>
 
-<h2>Laisser un Avis</h2>
-<form method="post" action="">
-    <p>Pseudo :</p> <input type="text" name="pseudo" required><br />
-    <p>Email :</p> <input type="email" name="email" required><br />
-    <p>Avis :</p> <textarea name="avis" required></textarea><br /><br />
-    <input type="submit" name="submit" value="Envoyer" />
-</form>
 
-<hr>
+    <main>
+        <h2>Laisser un Avis</h2>
+        <form method="post" action="">
+            <p>Pseudo :</p> <input type="text" name="pseudo" required><br />
+            <p>Email :</p> <input type="email" name="email" required><br />
+            <p>Avis :</p> <textarea name="avis" required></textarea><br /><br />
+            <input type="submit" name="submit" value="Envoyer" />
+        </form>
 
-<h2>Avis Approuvés</h2>
-<?php
-if (empty($avisApprouves)) {
-    echo "<p>Aucun avis approuvé n'est disponible pour le moment.</p>";
-} else {
-    foreach ($avisApprouves as $avis) {
-        echo "<div>";
-        echo "<p><strong>{$avis['pseudo']}</strong>: {$avis['avis']}</p>";
-        echo "</div>";
-    }
-}
-?>
+        <hr>
 
+        <h2>Avis Approuvés</h2>
+        <?php
+        if (empty($avisApprouves)) {
+            echo "<p>Aucun avis approuvé n'est disponible pour le moment.</p>";
+        } else {
+            foreach ($avisApprouves as $avis) {
+                echo "<div>";
+                echo "<p><strong>{$avis['pseudo']}</strong>: {$avis['avis']}</p>";
+                echo "</div>";
+            }
+        }
+        ?>
+    </main>
 </body>
 </html>

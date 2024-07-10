@@ -1,62 +1,62 @@
 body{
-    width: 100%;
+  width: 100%;
 }
 
 .animauxgrid {
-    max-width: 100%;
-    margin: 1rem auto;
-    display: grid;
-    grid-template-rows: repeat(6, auto);
-    grid-gap: 10px;
-    grid-auto-columns: minmax(11rem, auto);
-    box-sizing: border-box; /* Ajoutez cette règle pour inclure les bordures dans les dimensions de la grille */
-    color: black;
-  }
+  max-width: 90%;
+  height: auto;
+  margin: 1rem auto;
+  display: grid;
+  grid-template-rows: repeat(6, auto);
+  grid-gap: 10px;
+  grid-auto-columns: minmax(11rem, auto);
+  box-sizing: border-box; /* Ajoutez cette règle pour inclure les bordures dans les dimensions de la grille */
+  color: black;
+}
+
+.animauxgrid > div {
+  border: 2px solid rgb(233, 171, 88);
+  border-radius: 5px;
+  background-color: rgba(233, 171, 88, 0.5);
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
   
-  .animauxgrid > div {
-    border: 2px solid rgb(233, 171, 88);
-    border-radius: 5px;
-    background-color: rgba(233, 171, 88, 0.5);
-    padding: 1em;
-    height: 12rem;
-    display: flex;
-    flex-direction: row;
-    
-  }
-  
-  .animauxgrid img {
-    width: 10rem;
-    height: 10rem;
-    display: block;
-    object-fit: fill;
-    border: 3px solid rgb(0, 0, 0);
-  }
-  
-  .koala {
-    grid-row: 1 / 2;
-    grid-column: 1 / 2;
-  }
-  
-  .quokka {
-    grid-row: 2 / 3;
-    grid-column: 1 / 2;
-  }
-  
-  .wombat {
-    grid-row: 3 / 4;
-    grid-column: 1 / 2;
-  }
-  
-  .taz {
-    grid-row: 4 / 5;
-    grid-column: 1 / 2;
-  }
-  
-  .kangorou {
-    grid-row: 5 / 6;
-    grid-column: 1 / 2;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
+}
+
+.animauxgrid img {
+  width: 10rem;
+  height: 10rem;
+  display: block;
+  object-fit: fill;
+  border: 3px solid rgb(0, 0, 0);
+}
+
+.koala {
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+}
+
+.quokka {
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
+}
+
+.wombat {
+  grid-row: 3 / 4;
+  grid-column: 1 / 2;
+}
+
+.taz {
+  grid-row: 4 / 5;
+  grid-column: 1 / 2;
+}
+
+.kangorou {
+  grid-row: 5 / 6;
+  grid-column: 1 / 2;
+}
+
+* {
+  box-sizing: border-box;
+}

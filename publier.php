@@ -36,6 +36,7 @@ if(isset($_POST['envoi'])){
                 <a href="animaux.php">Animaux</a>
                 <a href="services.php">Services</a>
                 <a href="avis.php">Avis</a>
+                <a href="contact.php">Avis</a>
             </div>
         </div>
     </header>

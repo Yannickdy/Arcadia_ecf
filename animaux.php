@@ -144,7 +144,14 @@ $animaux = $requeteAnimaux->fetchAll(PDO::FETCH_ASSOC);
                 <form method="POST" action="" enctype="multipart/form-data">
                     <p><label>Nom : </label><input type="text" name="nom_a"></p>
                     <p><label>Race : </label><input type="text" name="race_a"></p>
-                    <p><label>Habitat : </label><input type="text" name="habitat_a"></p>
+                    <label for="role-select">Habitat :</label>
+                    <select id="role-select" name="habitat_a">
+                        <option value="">--Veuillez choisir une option--</option>
+                        <option value="savane">Savane</option>
+                        <option value="prairie">Prairie</option>
+                        <option value="toundra">Toundra</option>
+                        <option value="foret">Forêt</option>
+                    </select>
                     <p><label>Description : </label><textarea name="description"></textarea></p>
                     <p><label>Image : </label><input type="file" name="image_a"></p>
                     <input type="submit" name="envoi" value="Ajouter">

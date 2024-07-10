@@ -9,37 +9,34 @@ if(!isset($_SESSION['identifiant']) || empty($_SESSION['identifiant'])) {
     exit;
 }
 
-// Récupérer le rôle de l'utilisateur depuis la session
-$role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
-
 // Vérifier si l'utilisateur a le droit de modifier un animal
-if($role !== 'admin' && $role !== 'veterinaire') {
-    // Rediriger ou afficher un message d'erreur si l'utilisateur n'est ni administrateur ni vétérinaire
+if($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'veterinaire') {
+    // Rediriger ou afficher un message d'erreur si l'utilisateur n'est pas autorisé
     echo "Vous n'avez pas les droits nécessaires pour accéder à cette page.";
     exit;
 }
 
-// Vérifier si l'identifiant de l'animal à modifier est passé en paramètre
-if(!isset($_GET['animal_id']) || empty($_GET['animal_id'])) {
-    echo "Identifiant d'animal non spécifié.";
+// Récupérer les informations de l'animal à modifier
+$animalAModifier = null;
+if(isset($_GET['animal_id'])) {
+    $animalID = $_GET['animal_id'];
+    $requeteAnimal = $bdd->prepare('SELECT * FROM animaux WHERE id = ?');
+    $requeteAnimal->execute(array($animalID));
+    $animalAModifier = $requeteAnimal->fetch(PDO::FETCH_ASSOC);
+    
+    if(!$animalAModifier) {
+        echo "Animal non trouvé.";
+        exit;
+    }
+} else {
+    echo "ID d'animal non spécifié.";
     exit;
 }
 
-$animal_id = $_GET['animal_id'];
-
-// Récupérer les informations de l'animal à modifier depuis la base de données
-$requeteAnimal = $bdd->prepare('SELECT * FROM animaux WHERE id = ?');
-$requeteAnimal->execute(array($animal_id));
-$animal = $requeteAnimal->fetch(PDO::FETCH_ASSOC);
-
-if(!$animal) {
-    echo "Animal non trouvé.";
-    exit;
-}
-
-// Si un formulaire de modification est soumis
+// Vérifier si un formulaire de modification a été soumis
 if(isset($_POST['modification'])) {
     // Récupérer les données soumises
+    $animal_id = $_POST['animal_id'];
     $nom_a = htmlspecialchars($_POST['nom_a']);
     $race_a = htmlspecialchars($_POST['race_a']);
     $habitat_a = htmlspecialchars($_POST['habitat_a']);
@@ -74,6 +71,7 @@ if(isset($_POST['modification'])) {
                 <a href="animaux.php">Animaux</a>
                 <a href="services.php">Services</a>
                 <a href="avis.php">Avis</a>
+                <a href="contact.php">Contact</a>
             </div>
             <div class="utilisateur">
                 <?php 
@@ -87,4 +85,18 @@ if(isset($_POST['modification'])) {
 
     <main>
         <div class="modifier_animal">
-           
+            <h2>Modifier l'animal</h2>
+            <?php if($animalAModifier): ?>
+            <form method="POST" action="">
+                <input type="hidden" name="animal_id" value="<?php echo $animalAModifier['id']; ?>">
+                <p><label>Nom : </label><input type="text" name="nom_a" value="<?php echo htmlspecialchars($animalAModifier['nom_a']); ?>"></p>
+                <p><label>Race : </label><input type="text" name="race_a" value="<?php echo htmlspecialchars($animalAModifier['race_a']); ?>"></p>
+                <p><label>Habitat : </label><input type="text" name="habitat_a" value="<?php echo htmlspecialchars($animalAModifier['habitat_a']); ?>"></p>
+                <p><label>Description : </label><textarea name="description"><?php echo htmlspecialchars($animalAModifier['description']); ?></textarea></p>
+                <input type="submit" name="modification" value="Enregistrer les modifications">
+            </form>
+            <?php endif; ?>
+        </div>
+    </main>
+</body>
+</html>
