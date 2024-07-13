@@ -10,7 +10,7 @@ body{
   grid-template-rows: repeat(6, auto);
   grid-gap: 10px;
   grid-auto-columns: minmax(11rem, auto);
-  box-sizing: border-box; /* Ajoutez cette règle pour inclure les bordures dans les dimensions de la grille */
+  box-sizing: border-box; 
   color: black;
 }
 

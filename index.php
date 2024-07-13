@@ -22,11 +22,11 @@ echo "Identifiant: " . htmlspecialchars($_SESSION['identifiant']) . " | Rôle: "
                 <div class="logo"><a href="index.php"><img src="logo.png" alt="logo"></a></div>
  
                 <div class="principale">
-                  <a href="index.html">Acceuil</a>
-                  <a href="habitat.html">Habitat</a>
-                  <a href="animaux.html">Animaux</a>
-                  <a href="services.html">Services</a>
-                  <a href="avis.html">Avis</a>
+                  <a href="index.php">Acceuil</a>
+                  <a href="habitat.php">Habitat</a>
+                  <a href="animaux.php">Animaux</a>
+                  <a href="services.php">Services</a>
+                  <a href="avis.php">Avis</a>
                 </div>
         
             <div class="utilisateur">
@@ -39,7 +39,6 @@ echo "Identifiant: " . htmlspecialchars($_SESSION['identifiant']) . " | Rôle: "
     <main>
         
         <div class="d1"></div>
-        </div>   
         <section class="principal">
           <div class="presentation">
             <h2>Présentation</h2>
@@ -162,7 +161,7 @@ echo "Identifiant: " . htmlspecialchars($_SESSION['identifiant']) . " | Rôle: "
   <script src="script_index.js"></script>
     <footer>
         <div class="footer-content">
-            <p>&copy; 2024 Votre Entreprise. Tous droits réservés.</p>
+            <p></p>
             <ul>
               <li><a href="#">Accueil</a></li>
               <li><a href="#">À propos</a></li>

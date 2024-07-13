@@ -32,8 +32,8 @@ if(isset($_POST['envoi'])){
             
             if($imageFileName !== null) {
                 // Insérer l'animal dans la base de données avec l'image
-                $insertAnimal = $bdd->prepare('INSERT INTO animaux(nom_a, race_a, habitat_a, description, image_a) VALUES(?, ?, ?, ?, ?)');
-                $insertAnimal->execute(array($nom_a, $race_a, $habitat_a, $description, $imageFileName));
+                $ajoutAnimal = $bdd->prepare('INSERT INTO animaux(nom_a, race_a, habitat_a, description, image_a) VALUES(?, ?, ?, ?, ?)');
+                $ajoutAnimal->execute(array($nom_a, $race_a, $habitat_a, $description, $imageFileName));
                 
                 // Marquer que le nouvel animal a été ajouté avec succès
                 $nouvelAnimalAjoute = true;
@@ -127,11 +127,17 @@ $animaux = $requeteAnimaux->fetchAll(PDO::FETCH_ASSOC);
                 <li><strong>Habitat :</strong> <?php echo htmlspecialchars($animal['habitat_a']); ?></li>
                 <li><strong>Description :</strong> <?php echo nl2br(htmlspecialchars($animal['description'])); ?></li>
                 </ul>
-                <?php if($role === 'admin' || $role === 'veterinaire'): ?>
+                <?php if($_SESSION['role'] !== 'admin' || $_SESSION['role'] !== 'veterinaire'): ?>
+
                 <!-- Bouton de modification -->
                 <form method="GET" action="modifier_animal.php">
                     <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>">
                     <input type="submit" name="modifier" value="Modifier">
+                </form>
+                <!-- Bouton de suppression -->
+                <form method="POST" action="supprimer_animal.php" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet animal ?');">
+                    <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>">
+                    <input type="submit" name="supprimer" value="Supprimer">
                 </form>
                 <?php endif; ?>
             </div>

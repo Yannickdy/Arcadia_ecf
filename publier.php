@@ -9,8 +9,8 @@ if(isset($_POST['envoi'])){
         $habitat_a = htmlspecialchars($_POST['habitat_a']);
         $description = nl2br(htmlspecialchars($_POST['description']));
 
-        $insertAnimal = $bdd->prepare('INSERT INTO animaux(nom_a, race_a, habitat_a, description) VALUES(?, ?, ?, ?)');
-        $insertAnimal ->execute(array($nom_a, $race_a, $habitat_a, $description));
+        $ajoutAnimal = $bdd->prepare('INSERT INTO animaux(nom_a, race_a, habitat_a, description) VALUES(?, ?, ?, ?)');
+        $ajoutAnimal ->execute(array($nom_a, $race_a, $habitat_a, $description));
     }
 
 }

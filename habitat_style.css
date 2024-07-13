@@ -21,7 +21,7 @@
     display: none;
     padding: 20px;
     border-top: 2px solid #333;
-    text-align: center;  /* Center the text */
+    text-align: center;
 }
 
 .info-section.active {
@@ -29,25 +29,25 @@
 }
 
 .info-section img {
-    width: 50%;  /* Adjust the width as needed */
+    width: 50%;
     height: auto;
-    margin: 0 auto;  /* Center the image */
+    margin: 0 auto;
     display: block;
 }
 
 .info-section ul {
-    text-align: center; /* Centre le texte à l'intérieur de la liste */
-    padding-left: 0; /* Supprime le padding gauche par défaut */
+    text-align: center; 
+    padding-left: 0; 
 }
 
 .info-section ul li {
-    display: inline-block; /* Affiche chaque élément de liste sur une ligne */
-    text-align: left; /* Rétablit l'alignement à gauche du texte de la liste */
-    margin-left: auto; /* Centrez la marge à gauche */
-    margin-right: auto; /* Centrez la marge à droite */
-    list-style-type: none; /* Supprime les puces par défaut */
-    padding: 5px 10px; /* Ajoutez du padding pour l'espace entre les éléments de la liste */
-    border: 1px solid #ccc; /* Ajoute une bordure autour des éléments de la liste */
-    border-radius: 5px; /* Ajoutez un rayon de bordure aux coins */
-    background-color: #f0f0f0; /* Ajoute un fond de couleur gris pâle */
+    display: inline-block; 
+    text-align: left; 
+    margin-left: auto; 
+    margin-right: auto; 
+    list-style-type: none; 
+    padding: 5px 10px; 
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    background-color: #f0f0f0; 
 }

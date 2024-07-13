@@ -17,14 +17,14 @@ if($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'veterinaire') {
 }
 
 // Récupérer les informations de l'animal à modifier
-$animalAModifier = null;
+$modifAnimal = null;
 if(isset($_GET['animal_id'])) {
     $animalID = $_GET['animal_id'];
     $requeteAnimal = $bdd->prepare('SELECT * FROM animaux WHERE id = ?');
     $requeteAnimal->execute(array($animalID));
-    $animalAModifier = $requeteAnimal->fetch(PDO::FETCH_ASSOC);
+    $modifAnimal = $requeteAnimal->fetch(PDO::FETCH_ASSOC);
     
-    if(!$animalAModifier) {
+    if(!$modifAnimal) {
         echo "Animal non trouvé.";
         exit;
     }
@@ -86,13 +86,13 @@ if(isset($_POST['modification'])) {
     <main>
         <div class="modifier_animal">
             <h2>Modifier l'animal</h2>
-            <?php if($animalAModifier): ?>
+            <?php if($modifAnimal): ?>
             <form method="POST" action="">
-                <input type="hidden" name="animal_id" value="<?php echo $animalAModifier['id']; ?>">
-                <p><label>Nom : </label><input type="text" name="nom_a" value="<?php echo htmlspecialchars($animalAModifier['nom_a']); ?>"></p>
-                <p><label>Race : </label><input type="text" name="race_a" value="<?php echo htmlspecialchars($animalAModifier['race_a']); ?>"></p>
-                <p><label>Habitat : </label><input type="text" name="habitat_a" value="<?php echo htmlspecialchars($animalAModifier['habitat_a']); ?>"></p>
-                <p><label>Description : </label><textarea name="description"><?php echo htmlspecialchars($animalAModifier['description']); ?></textarea></p>
+                <input type="hidden" name="animal_id" value="<?php echo $modifAnimal['id']; ?>">
+                <p><label>Nom : </label><input type="text" name="nom_a" value="<?php echo htmlspecialchars($modifAnimal['nom_a']); ?>"></p>
+                <p><label>Race : </label><input type="text" name="race_a" value="<?php echo htmlspecialchars($modifAnimal['race_a']); ?>"></p>
+                <p><label>Habitat : </label><input type="text" name="habitat_a" value="<?php echo htmlspecialchars($modifAnimal['habitat_a']); ?>"></p>
+                <p><label>Description : </label><textarea name="description"><?php echo htmlspecialchars($modifAnimal['description']); ?></textarea></p>
                 <input type="submit" name="modification" value="Enregistrer les modifications">
             </form>
             <?php endif; ?>

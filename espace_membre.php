@@ -14,16 +14,15 @@ $bdd = new PDO('mysql:host=localhost;dbname=zoo;charset=utf8;', 'root', '');
     <title>Document</title>
 </head>
 <body>
-   <!-- Link to Add User Page -->
+   <!-- Ajout d'un utilisateur -->
    <a href="admin.php">Add New User</a>
 
 <?php
-// Assuming $bdd is your PDO instance
-// Fetch data from the database
+
 $recupUsers = $bdd->query('SELECT * FROM membres');
 ?>
 
-<!-- Display the table -->
+<!-- Affichage des utilisateur -->
 <table>
     <tr>
         <th>Identifiant</th>

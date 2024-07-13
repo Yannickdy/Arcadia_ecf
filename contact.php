@@ -31,7 +31,7 @@
     <?php
     // Vérification et traitement de l'envoi du formulaire
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Connexion à la base de données avec PDO
+
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=zoo;charset=utf8', 'root', '');
             $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -44,21 +44,20 @@
         $description = htmlspecialchars($_POST['description']);
         $email = htmlspecialchars($_POST['email']);
 
-        // Insertion des données dans la table demandes_contact
-        $stmt = $bdd->prepare('INSERT INTO contact (titre, description, email) VALUES (?, ?, ?)');
-        $stmt->execute(array($titre, $description, $email));
 
-        // Email de réception au zoo
+        $ajoutContact = $bdd->prepare('INSERT INTO contact (titre, description, email) VALUES (?, ?, ?)');
+        $ajoutContact->execute(array($titre, $description, $email));
+
         $to = 'email_du_zoo@example.com';
         $subject = 'Nouvelle demande de contact depuis le site';
         $message = "Titre : $titre\n\n";
         $message .= "Description :\n$description\n\n";
         $message .= "Email du visiteur : $email";
 
-        // En-têtes du mail
+
         $headers = "From: $email\r\nReply-To: $email\r\n";
 
-        // Envoi du mail
+
         if (mail($to, $subject, $message, $headers)) {
             echo "<p>Votre demande a été envoyée avec succès. Nous vous répondrons dès que possible.</p>";
         } else {

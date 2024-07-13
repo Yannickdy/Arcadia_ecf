@@ -7,7 +7,7 @@ if(isset($_POST['envoi'])){
     $pseudo = htmlspecialchars($_POST['pseudo']);
     $mdp = sha1($_POST['mdp']);
     $role;
-    // Ajouter le code pour traiter les données du formulaire ici.
+
   }
   else{
     $error_message = "Tous les champs doivent être remplis";

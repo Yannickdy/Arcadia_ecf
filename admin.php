@@ -99,12 +99,10 @@ if(isset($_POST['envoi'])) {
         </form>
 
         <?php
-// Assuming $bdd is your PDO instance
-// Fetch data from the database
+
 $recupUsers = $bdd->query('SELECT * FROM membres');
 ?>
 
-<!-- Display the table -->
 <table>
             <tr>
                 <th>Identifiant</th>
