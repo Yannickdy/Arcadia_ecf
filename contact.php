@@ -45,8 +45,8 @@
         $email = htmlspecialchars($_POST['email']);
 
         // Insertion des données dans la table demandes_contact
-        $stmt = $bdd->prepare('INSERT INTO contact (titre, description, email) VALUES (?, ?, ?)');
-        $stmt->execute(array($titre, $description, $email));
+        $insertContact = $bdd->prepare('INSERT INTO contact (titre, description, email) VALUES (?, ?, ?)');
+        $insertContact->execute(array($titre, $description, $email));
 
         // Email de réception au zoo
         $to = 'email_du_zoo@example.com';

@@ -16,8 +16,8 @@ if (isset($_POST['submit'])) {
         $email = htmlspecialchars($_POST['email']);
         $avis = htmlspecialchars($_POST['avis']);
 
-        $stmt = $bdd->prepare('INSERT INTO avis (pseudo, email, avis) VALUES (?, ?, ?)');
-        $stmt->execute(array($pseudo, $email, $avis));
+        $recupAvis = $bdd->prepare('INSERT INTO avis (pseudo, email, avis) VALUES (?, ?, ?)');
+        $recupAvis->execute(array($pseudo, $email, $avis));
 
         echo "<p>Votre avis a été soumis.</p>";
     } else {
@@ -26,9 +26,9 @@ if (isset($_POST['submit'])) {
 }
 
 // Récupération et affichage des avis approuvés
-$stmt = $bdd->prepare('SELECT pseudo, avis FROM avis WHERE approuve = 1');
-$stmt->execute();
-$avisApprouves = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$recupAvis = $bdd->prepare('SELECT pseudo, avis FROM avis WHERE approuve = 1');
+$recupAvis->execute();
+$avisApprouves = $recupAvis->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>

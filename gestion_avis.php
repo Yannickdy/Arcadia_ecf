@@ -18,18 +18,18 @@ if (!isset($_SESSION['id']) || ($_SESSION['role'] != 'employe' && $_SESSION['rol
 if (isset($_GET['action']) && isset($_GET['id'])) {
     $id = intval($_GET['id']);
     if ($_GET['action'] == 'approuver') {
-        $stmt = $bdd->prepare('UPDATE avis SET approuve = 1 WHERE id = ?');
-        $stmt->execute(array($id));
+        $infoAvis = $bdd->prepare('UPDATE avis SET approuve = 1 WHERE id = ?');
+        $infoAvis->execute(array($id));
     } elseif ($_GET['action'] == 'supprimer') {
-        $stmt = $bdd->prepare('DELETE FROM avis WHERE id = ?');
-        $stmt->execute(array($id));
+        $infoAvis = $bdd->prepare('DELETE FROM avis WHERE id = ?');
+        $infoAvis->execute(array($id));
     }
 }
 
 // Récupérer tous les avis non approuvés
-$stmt = $bdd->prepare('SELECT * FROM avis WHERE approuve = 0');
-$stmt->execute();
-$avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$infoAvis = $bdd->prepare('SELECT * FROM avis WHERE approuve = 0');
+$infoAvis->execute();
+$avis = $infoAvis->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
