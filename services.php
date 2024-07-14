@@ -14,21 +14,28 @@ echo "Identifiant: " . htmlspecialchars($_SESSION['identifiant']) . " | Rôle: "
 
 </head>
 <body>
-    <header>
-            <div class="header_container">
-                <div class="logo"><a href="index.php"><img src="logo.png" alt="logo"></a></div>
- 
-                <div class="principale">
-                    <a href="index.php">Acceuil</a>
-                    <a href="habitat.php">Habitat</a>
-                    <a href="animaux.php">Animaux</a>
-                    <a href="services.php">Services</a>
-                    <a href="avis.php">Avis</a>
-                  </div>
-        
+
+
+<header>
+        <div class="header_container">
+            <div class="logo"><a href="index.php"><img src="logo.png" alt="logo"></a></div>
+            <div class="principale">
+                <a href="index.php">Accueil</a>
+                <a href="habitat.php">Habitat</a>
+                <a href="animaux.php">Animaux</a>
+                <a href="services.php">Services</a>
+                <a href="avis.php">Avis</a>
+                <?php if(isset($_SESSION['identifiant'])): ?>
+                    <a href="staff.php">Employé</a>
+                <?php endif; ?>
+            </div>
             <div class="utilisateur">
-                <a href="connexion.php"> connexion</a>
-                <a href="inscription.php">inscription</a>
+                <?php if(isset($_SESSION['identifiant'])): ?>
+                    Identifiant: <?= htmlspecialchars($_SESSION['identifiant']); ?> | Rôle: <?= htmlspecialchars($_SESSION['role']); ?>
+                    <a href="deconnexion.php">Déconnexion</a>
+                <?php else: ?>
+                    <a href="connexion.php">Connexion</a>
+                <?php endif; ?>
             </div>
         </div>
     </header>

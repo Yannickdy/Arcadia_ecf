@@ -1,7 +1,6 @@
 <?php 
 session_start();
-// if($_SESSION)
-echo "Identifiant: " . htmlspecialchars($_SESSION['identifiant']) . " | Rôle: " . htmlspecialchars($_SESSION['role']);
+
 
 
 ?>
@@ -17,21 +16,28 @@ echo "Identifiant: " . htmlspecialchars($_SESSION['identifiant']) . " | Rôle: "
 
 </head>
 <body>
-    <header>
-            <div class="header_container">
-                <div class="logo"><a href="index.php"><img src="logo.png" alt="logo"></a></div>
- 
-                <div class="principale">
-                  <a href="index.php">Acceuil</a>
-                  <a href="habitat.php">Habitat</a>
-                  <a href="animaux.php">Animaux</a>
-                  <a href="services.php">Services</a>
-                  <a href="avis.php">Avis</a>
-                </div>
-        
+
+
+<header>
+        <div class="header_container">
+            <div class="logo"><a href="index.php"><img src="logo.png" alt="logo"></a></div>
+            <div class="principale">
+                <a href="index.php">Accueil</a>
+                <a href="habitat.php">Habitat</a>
+                <a href="animaux.php">Animaux</a>
+                <a href="services.php">Services</a>
+                <a href="avis.php">Avis</a>
+                <?php if(isset($_SESSION['identifiant'])): ?>
+                    <a href="staff.php">Employé</a>
+                <?php endif; ?>
+            </div>
             <div class="utilisateur">
-                <a href="connexion.php"> connexion</a>
-                <a href="inscription.php">inscription</a>
+                <?php if(isset($_SESSION['identifiant'])): ?>
+                    Identifiant: <?= htmlspecialchars($_SESSION['identifiant']); ?> | Rôle: <?= htmlspecialchars($_SESSION['role']); ?>
+                    <a href="deconnexion.php">Déconnexion</a>
+                <?php else: ?>
+                    <a href="connexion.php">Connexion</a>
+                <?php endif; ?>
             </div>
         </div>
     </header>
@@ -41,6 +47,7 @@ echo "Identifiant: " . htmlspecialchars($_SESSION['identifiant']) . " | Rôle: "
         <div class="d1"></div>
         </div>   
         <section class="principal">
+          <div class="presentation">
             <h2>Présentation</h2>
             <div class="texte_presentation">
                 
@@ -54,6 +61,7 @@ echo "Identifiant: " . htmlspecialchars($_SESSION['identifiant']) . " | Rôle: "
                     Conservation et Éducation
                     Le Zoo Australien s'engage activement dans la conservation des espèces menacées et la protection de leurs habitats naturels. Grâce à nos programmes de reproduction et à nos initiatives éducatives, nous contribuons à la préservation de cette biodiversité unique.</p>
             </div>
+          </div>
 
             <div class="services">
                 <h2>Nos services</h2>
@@ -115,36 +123,42 @@ echo "Identifiant: " . htmlspecialchars($_SESSION['identifiant']) . " | Rôle: "
                 <h2>Habitat</h2>
                 <p> Cliquez sur un des habitats afin de se rendre à l'habitat voulu <br><a href="habitat.php"> Cliquez ici afin d'aller sur la page des habitats</a> </p>
 
-            <div class="habitatgrid">
-              <div class='habitsavane'>
-                  <a href='habitat.php#savane'><img src='./images/savane.jpg' alt='Savane'></a>
-              </div>
-              <div class='habitforet'>
-                  <a href='#foret'><img src='./images/foret.jpg' alt='Forêt'></a>
-              </div>
-              <div class='prairie'>
-                  <a href='#prairie'><img src='./images/prairie.jpeg' alt='Prairie'></a>
-              </div>
-              <div class='habittoundra'>
-                  <a href='#toundra'><img src='./images/toundra.jpg' alt='Toundra'></a>
-              </div>
-          </div>
-
-
-
-
-
-
-
-            <div class="animaux">
-                <h2>Animaux</h2>
-                <p> Cliquez sur un des animaux pour arrifer directement à sa fiche<br><a href="animaux.php">Cliquez ici afin d'aller sur la page des animaux</a> </p>
-                    <div class="animauxgrid">
-                    <div class='koala'><a href='animaux.php#koala'><img src='./images/koala.jpg' alt=''></a></div>
-                    <div class='quokka'><a href='animaux.php#quokka'><img src='./images/quokka.jpg' alt=''></a></div>
-                    <div class='taz'><a href='animaux.php#taz'><img src='./images/taz.jpg' alt=''></a></div>
-                    <div class='wombat'><a href='animaux.php#wombat'><img src='./images/wombat.jpg' alt=''></a></div>
+              <div class="habitatgrid">
+                <div class='habitsavane'>
+                    <a href='habitat.php#savane'><img src='./images/savane.jpg' alt='Savane'></a>
                 </div>
+                <div class='habitforet'>
+                    <a href='#foret'><img src='./images/foret.jpg' alt='Forêt'></a>
+                </div>
+                <div class='prairie'>
+                    <a href='#prairie'><img src='./images/prairie.jpeg' alt='Prairie'></a>
+                </div>
+                <div class='habittoundra'>
+                    <a href='#toundra'><img src='./images/toundra.jpg' alt='Toundra'></a>
+                </div>
+              </div>
+            </div>
+              <div class="animaux">
+                  <h2>Animaux</h2>
+                  <p> Cliquez sur un des animaux pour arrifer directement à sa fiche<br><a href="animaux.php">Cliquez ici afin d'aller sur la page des animaux</a> </p>
+                      <div class="animauxgrid">
+                      <div class='koala'><a href='animaux.php#koala'><img src='./images/koala.jpg' alt=''></a></div>
+                      <div class='quokka'><a href='animaux.php#quokka'><img src='./images/quokka.jpg' alt=''></a></div>
+                      <div class='taz'><a href='animaux.php#taz'><img src='./images/taz.jpg' alt=''></a></div>
+                      <div class='wombat'><a href='animaux.php#wombat'><img src='./images/wombat.jpg' alt=''></a></div>
+                  </div>
+              </div>
+            
+            <div class="avis">
+              <h2>Votre avis</h2>
+              <p>Vi vous voulez laisser un avis n'hésitez pas à utiliser le formulaire ci-dessous</p>
+              <h2>Laisser un Avis</h2>
+              <form method="post" action="">
+                  <p>Pseudo :</p> <input type="text" name="pseudo" required><br />
+                  <p>Email :</p> <input type="email" name="email" required><br />
+                  <p>Avis :</p> <textarea name="avis" required></textarea><br />
+                  <input type="submit" name="submit" value="Envoyer" />
+              </form>
             </div>
         </section>
 

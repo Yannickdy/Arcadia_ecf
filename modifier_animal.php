@@ -87,4 +87,22 @@ if(isset($_POST['modification'])) {
 
     <main>
         <div class="modifier_animal">
-           
+            <h2>Modifier un animal</h2>
+            <form method="POST" action="">
+                <p><label>Nom : </label><input type="text" name="nom_a" value="<?php echo htmlspecialchars($animal['nom_a']); ?>"></p>
+                <p><label>Race : </label><input type="text" name="race_a" value="<?php echo htmlspecialchars($animal['race_a']); ?>"></p>
+                Habitat :
+                <select id="role-select" name="habitat_a">
+                    <option value="">--Veuillez choisir une option--</option>
+                    <option value="Savane" <?php if($animal['habitat_a'] == 'Savane') echo 'selected'; ?>>Savane</option>
+                    <option value="Prairie" <?php if($animal['habitat_a'] == 'Prairie') echo 'selected'; ?>>Prairie</option>
+                    <option value="Foret" <?php if($animal['habitat_a'] == 'Foret') echo 'selected'; ?>>Foret</option>
+                    <option value="Toundra" <?php if($animal['habitat_a'] == 'Toundra') echo 'selected'; ?>>Toundra</option>
+                </select>
+                <p><label>Description : </label><textarea name="description"><?php echo htmlspecialchars($animal['description']); ?></textarea></p>
+                <input type="submit" name="modification" value="Modifier">
+            </form>
+        </div>
+    </main>
+</body>
+</html>

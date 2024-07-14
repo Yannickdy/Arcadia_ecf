@@ -127,12 +127,16 @@ $animaux = $requeteAnimaux->fetchAll(PDO::FETCH_ASSOC);
                 <li><strong>Habitat :</strong> <?php echo htmlspecialchars($animal['habitat_a']); ?></li>
                 <li><strong>Description :</strong> <?php echo nl2br(htmlspecialchars($animal['description'])); ?></li>
                 </ul>
-                <?php if($role === 'admin' || $role === 'veterinaire'): ?>
+                <?php if($_SESSION['role'] !== 'admin' || $_SESSION['role'] !== 'veterinaire'): ?> 
                 <!-- Bouton de modification -->
                 <form method="GET" action="modifier_animal.php">
                     <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>">
                     <input type="submit" name="modifier" value="Modifier">
                 </form>
+                <form method="POST" action="supprimer_animal.php" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet animal ?');">
+    <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>">
+    <input type="submit" name="supprimer" value="Supprimer">
+</form>
                 <?php endif; ?>
             </div>
 
@@ -144,7 +148,14 @@ $animaux = $requeteAnimaux->fetchAll(PDO::FETCH_ASSOC);
                 <form method="POST" action="" enctype="multipart/form-data">
                     <p><label>Nom : </label><input type="text" name="nom_a"></p>
                     <p><label>Race : </label><input type="text" name="race_a"></p>
-                    <p><label>Habitat : </label><input type="text" name="habitat_a"></p>
+                    Habitat :
+                <select id="role-select" name="habitat_a">
+                    <option value="">--Veuillez choisir une option--</option>
+                    <option value="Savane">Savane</option>
+                    <option value="Prairie">Prairie</option>
+                    <option value="Foret">Foret</option>
+                    <option value="Toundra">Toundra</option>
+                </select>
                     <p><label>Description : </label><textarea name="description"></textarea></p>
                     <p><label>Image : </label><input type="file" name="image_a"></p>
                     <input type="submit" name="envoi" value="Ajouter">

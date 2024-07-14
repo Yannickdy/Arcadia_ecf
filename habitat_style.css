@@ -21,8 +21,118 @@
     display: none;
     padding: 20px;
     border-top: 2px solid #333;
+    text-align: center;  /* Center the text */
 }
 
 .info-section.active {
     display: block;
+}
+
+.info-section img {
+    width: 50%;  /* Adjust the width as needed */
+    height: auto;
+    margin: 0 auto;  /* Center the image */
+    display: block;
+}
+
+.info-section ul {
+    text-align: center; /* Center the text inside the list */
+    padding-left: 0; /* Remove the default left padding */
+}
+
+.info-section ul li {
+    display: inline-block; /* Display each list item inline */
+    text-align: left; /* Restore left alignment for list item text */
+    margin-left: auto; /* Center the left margin */
+    margin-right: auto; /* Center the right margin */
+    list-style-type: none; /* Remove default bullets */
+    padding: 5px 10px; /* Add padding for space between list items */
+    border: 1px solid #ccc; /* Add a border around list items */
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    background-color: #f0f0f0; /* Add a light grey background color */
+}
+
+/* Media Queries */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .habitat {
+        justify-content: space-between;
+    }
+
+    .habitat img {
+        width: 180px;
+        height: 135px;
+    }
+
+    .info-section {
+        padding: 15px;
+    }
+
+    .info-section img {
+        width: 60%;  /* Adjust the width as needed */
+    }
+
+    .info-section ul li {
+        padding: 4px 8px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .habitat img {
+        width: 160px;
+        height: 120px;
+    }
+
+    .info-section {
+        padding: 10px;
+    }
+
+    .info-section img {
+        width: 70%;  /* Adjust the width as needed */
+    }
+
+    .info-section ul li {
+        padding: 3px 6px;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    .habitat img {
+        width: 140px;
+        height: 105px;
+    }
+
+    .info-section {
+        padding: 5px;
+    }
+
+    .info-section img {
+        width: 80%;  /* Adjust the width as needed */
+    }
+
+    .info-section ul li {
+        padding: 2px 4px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .habitat {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .habitat img {
+        width: 120px;
+        height: 90px;
+    }
+
+    .info-section {
+        padding: 2px;
+    }
+
+    .info-section img {
+        width: 90%;  /* Adjust the width as needed */
+    }
+
+    .info-section ul li {
+        padding: 1px 2px;
+    }
 }

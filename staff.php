@@ -7,13 +7,7 @@ try {
     die('Erreur : '.$e->getMessage());
 }
 
-// Vérifier si l'utilisateur a le droit d'ajouter un animal
-if($_SESSION['role'] !== 'admin') {
-    // Rediriger ou afficher un message d'erreur si l'utilisateur n'est pas administrateur
-    echo "Vous n'avez pas les droits nécessaires pour accéder à cette page.";
-    exit;
-}
-
+$error_message = "";
 
 if(isset($_POST['envoi'])) {
     if(!empty($_POST['identifiant']) AND !empty($_POST['mdp']) AND !empty($_POST['role']) AND !empty($_POST['prenom']) AND !empty($_POST['nom'])) {
@@ -71,12 +65,13 @@ if(isset($_POST['envoi'])) {
                 <a href="animaux.php">Animaux</a>
                 <a href="services.php">Services</a>
                 <a href="avis.php">Avis</a>
+                <?php if(isset($_SESSION['identifiant'])): ?>
+                <a href="staff.php">Employé</a> <br /><br />
+                <?php endif; ?>
                 <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                 <a href="admin.php">Espace Administrateur</a>
                 <?php endif; ?>
-                <?php if(isset($_SESSION['identifiant'])): ?>
-                    <a href="staff.php">Employé</a>
-                <?php endif; ?>
+
             </div>
             <div class="utilisateur">
                 <?php if(isset($_SESSION['identifiant'])): ?>
