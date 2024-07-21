@@ -41,10 +41,10 @@ CREATE TABLE `animaux` (
 --
 
 INSERT INTO `animaux` (`id`, `image_a`, `nom_a`, `race_a`, `habitat_a`, `description`) VALUES
-(25, 0x363639333061343463646264622e706e67, 'Marty', 'Lion', 'Prairie', 'ddd'),
-(27, 0x363639336164306634333330382e706e67, 'timon', 'Lion', 'Savane', 'rggr<br />\r\ngr<br />\r\ngr<br />\r\ng<br />\r\nrg<br />\r\nr<br />\r\ng<br />\r\nhj<br />\r\nj,jhjq<br />\r\n<br />\r\nrgqq'),
-(28, 0x363639336165353437633362382e706e67, 'timon', 'Lion', 'Savane', 'rggr<br />\r\ngr<br />\r\ngr<br />\r\ng<br />\r\nrg<br />\r\nr<br />\r\ng<br />\r\nhj<br />\r\nj,jhjq<br />\r\n<br />\r\nrgqq'),
-(29, 0x363639343163613265636434322e706e67, 'Marty', 'Lion', 'Prairie', 'Salut maggle');
+(1, 0x363639333061343463646264622e706e67, 'Marty', 'Lion', 'Prairie', 'ddd'),
+(2, 0x363639336164306634333330382e706e67, 'timon', 'Lion', 'Savane', 'rggr<br />\r\ngr<br />\r\ngr<br />\r\ng<br />\r\nrg<br />\r\nr<br />\r\ng<br />\r\nhj<br />\r\nj,jhjq<br />\r\n<br />\r\nrgqq'),
+(3, 0x363639336165353437633362382e706e67, 'timon', 'Lion', 'Savane', 'rggr<br />\r\ngr<br />\r\ngr<br />\r\ng<br />\r\nrg<br />\r\nr<br />\r\ng<br />\r\nhj<br />\r\nj,jhjq<br />\r\n<br />\r\nrgqq'),
+(4, 0x363639343163613265636434322e706e67, 'Marty', 'Lion', 'Prairie', 'Salut maggle');
 
 -- --------------------------------------------------------
 
