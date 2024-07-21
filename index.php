@@ -1,7 +1,5 @@
 <?php 
 session_start();
-$error_message = "";
-$success_message = "";
 
 // Emplacement du fichier de stockage des horaires
 $file_path = 'horaires.json';
