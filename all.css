@@ -10,14 +10,14 @@
   
   .logo {
     background-color: #e5d5be;
-    max-width: 100%; /* Ajustez la largeur du logo si nécessaire */
-    height: auto; 
+    max-width: 10%;
+    height: 100%;
   }
   
-  .logo img {
-    max-height: auto; /* Ajustez la hauteur de l'image pour s'adapter à la hauteur de .logo */
+   .logo img {
+    max-height: 100%; 
     width: auto;
-  }
+  } 
   
   .principale {
   margin: 0%;
@@ -50,3 +50,52 @@
     66.67% {background-image: url("./images/kangourou_fond.jpg");}
     100% {background-image: url("./images/koala_fond.jpg");}
   }
+
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-left {
+    flex: 1;
+}
+
+.footer-left h3 {
+    margin-top: 0;
+}
+
+.footer-left ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-left ul li {
+    margin: 5px 0;
+}
+
+.footer-right {
+    flex: 1;
+    text-align: right;
+}
+
+.footer-right p {
+    margin: 5px 0;
+}
+
+.footer-right a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-right a:hover {
+    text-decoration: underline;
+}

@@ -15,12 +15,19 @@ body {
 }
 
 .animauxgrid > div {
-  border: 2px solid rgb(233, 171, 88);
+  border: 3px solid rgb(0, 0, 0);
   border-radius: 5px;
-  background-color: rgba(233, 171, 88, 0.5);
   padding: 1em;
   display: flex;
   flex-direction: row;
+}
+
+.animauxgrid > div:nth-child(odd) {
+  background-color: white;
+}
+
+.animauxgrid > div:nth-child(even) {
+  background-color: #EDEDED;
 }
 
 .animauxgrid img {
@@ -60,9 +67,8 @@ body {
   box-sizing: border-box;
 }
 
-
 /* Media Queries */
-@media (max-width: 1200px) {
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
   .animauxgrid {
     grid-template-rows: repeat(3, auto);
     grid-template-columns: repeat(2, 1fr);
@@ -74,7 +80,7 @@ body {
   }
 }
 
-@media (max-width: 992px) {
+@media only screen and (min-width: 768px) and (max-width: 992px) {
   .animauxgrid {
     grid-template-rows: repeat(6, auto);
     grid-template-columns: 1fr;
@@ -86,22 +92,16 @@ body {
   }
 
   .animauxgrid > div {
-    flex-direction: column;
     align-items: center;
     text-align: center;
   }
 }
 
-@media (max-width: 768px) {
+@media only screen and (min-width: 600px) and (max-width: 768px) {
   .animauxgrid {
     grid-template-rows: repeat(6, auto);
     grid-template-columns: 1fr;
     grid-gap: 5px;
-  }
-
-  .animauxgrid img {
-    width: 6rem;
-    height: 6rem;
   }
 
   .animauxgrid > div {
@@ -109,12 +109,16 @@ body {
   }
 }
 
-@media (max-width: 576px) {
+@media only screen and (max-width: 600px) {
+  .animal {
+    display: flex;
+    justify-content: center;
+  }
+
   .animauxgrid img {
     width: 5rem;
     height: 5rem;
   }
-
   .animauxgrid > div {
     padding: 0.25em;
   }

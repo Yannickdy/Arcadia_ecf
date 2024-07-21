@@ -35,11 +35,12 @@ $avisApprouves = $recupAvis->fetchAll(PDO::FETCH_ASSOC);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="all.css">
     <title>Avis</title>
 </head>
 <body>
 
-    <header>
+<header>
         <div class="header_container">
             <div class="logo"><a href="index.php"><img src="logo.png" alt="logo"></a></div>
             <div class="principale">
@@ -62,29 +63,32 @@ $avisApprouves = $recupAvis->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </header>
+    
+    <main>
+        <div class="d1"></div>
 
-<h2>Laisser un Avis</h2>
-<form method="post" action="">
-    <p>Pseudo :</p> <input type="text" name="pseudo" required><br />
-    <p>Email :</p> <input type="email" name="email" required><br />
-    <p>Avis :</p> <textarea name="avis" required></textarea><br /><br />
-    <input type="submit" name="submit" value="Envoyer" />
-</form>
+        <h2>Laisser un Avis</h2>
+        <form method="post" action="">
+            <p>Pseudo :</p> <input type="text" name="pseudo" required><br />
+            <p>Email :</p> <input type="email" name="email" required><br />
+            <p>Avis :</p> <textarea name="avis" required></textarea><br /><br />
+            <input type="submit" name="submit" value="Envoyer" />
+        </form>
 
-<hr>
+        <hr>
 
-<h2>Avis Approuvés</h2>
-<?php
-if (empty($avisApprouves)) {
-    echo "<p>Aucun avis approuvé n'est disponible pour le moment.</p>";
-} else {
-    foreach ($avisApprouves as $avis) {
-        echo "<div>";
-        echo "<p><strong>{$avis['pseudo']}</strong>: {$avis['avis']}</p>";
-        echo "</div>";
-    }
-}
-?>
-
+        <h2>Avis Approuvés</h2>
+        <?php
+        if (empty($avisApprouves)) {
+            echo "<p>Aucun avis approuvé n'est disponible pour le moment.</p>";
+        } else {
+            foreach ($avisApprouves as $avis) {
+                echo "<div>";
+                echo "<p><strong>{$avis['pseudo']}</strong>: {$avis['avis']}</p>";
+                echo "</div>";
+            }
+        }
+        ?>
+    </main>
 </body>
 </html>

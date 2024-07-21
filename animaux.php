@@ -1,84 +1,21 @@
-<?php 
+<?php
 session_start();
-$bdd = new PDO('mysql:host=localhost;dbname=zoo;charset=utf8;', 'root', '');
+$bdd = new PDO('mysql:host=localhost;dbname=zoo;charset=utf8', 'root', '');
 
-// Vérifier si l'utilisateur est connecté
-if(!isset($_SESSION['identifiant']) || empty($_SESSION['identifiant'])) {
-    // Rediriger vers la page de connexion si non connecté
-    header("Location: connexion.php");
-    exit;
-}
-
-// Vérifier si l'utilisateur a le droit d'ajouter un animal
-if($_SESSION['role'] !== 'admin') {
-    // Rediriger ou afficher un message d'erreur si l'utilisateur n'est pas administrateur
-    echo "Vous n'avez pas les droits nécessaires pour accéder à cette page.";
-    exit;
-}
-
-$nouvelAnimalAjoute = false;
-
-if(isset($_POST['envoi'])){
-    if(!empty($_POST['nom_a']) AND !empty($_POST['race_a']) AND !empty($_POST['habitat_a']) AND !empty($_POST['description'])){
-        $nom_a = htmlspecialchars($_POST['nom_a']);
-        $race_a = htmlspecialchars($_POST['race_a']);
-        $habitat_a = htmlspecialchars($_POST['habitat_a']);
-        $description = nl2br(htmlspecialchars($_POST['description']));
-        
-        // Gestion de l'upload d'image
-        if(isset($_FILES['image_a']) && $_FILES['image_a']['error'] === UPLOAD_ERR_OK) {
-            $image_a = $_FILES['image_a'];
-            $imageFileName = uploadImage($image_a);
-            
-            if($imageFileName !== null) {
-                // Insérer l'animal dans la base de données avec l'image
-                $insertAnimal = $bdd->prepare('INSERT INTO animaux(nom_a, race_a, habitat_a, description, image_a) VALUES(?, ?, ?, ?, ?)');
-                $insertAnimal->execute(array($nom_a, $race_a, $habitat_a, $description, $imageFileName));
-                
-                // Marquer que le nouvel animal a été ajouté avec succès
-                $nouvelAnimalAjoute = true;
-            } else {
-                echo "Erreur lors de l'upload de l'image.";
-            }
-        } else {
-            echo "Erreur lors de l'upload de l'image.";
-        }
-    }
-}
-
-// Fonction pour gérer l'upload d'image
-function uploadImage($image) {
-    $targetDir = "./images/";
-    $targetFile = $targetDir . basename($image['name']);
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-    $newFileName = uniqid() . "." . $imageFileType;
-
-    if(move_uploaded_file($image['tmp_name'], $targetDir . $newFileName)) {
-        return $newFileName;
-    } else {
-        return null;
-    }
-}
-
-if(isset($_POST['modification'])) {
-    // Récupérer les données soumises
-    $animal_id = $_POST['animal_id'];
-    $nom_a = htmlspecialchars($_POST['nom_a']);
-    $race_a = htmlspecialchars($_POST['race_a']);
-    $habitat_a = htmlspecialchars($_POST['habitat_a']);
-    $description = nl2br(htmlspecialchars($_POST['description']));
-
-    // Mettre à jour l'animal dans la base de données
-    $updateAnimal = $bdd->prepare('UPDATE animaux SET nom_a = ?, race_a = ?, habitat_a = ?, description = ? WHERE id = ?');
-    $updateAnimal->execute(array($nom_a, $race_a, $habitat_a, $description, $animal_id));
-
-    // Redirection vers la page principale après la modification
-    header("Location: animaux.php");
-    exit;
-}
 // Récupérer tous les animaux depuis la base de données
 $requeteAnimaux = $bdd->query('SELECT * FROM animaux');
 $animaux = $requeteAnimaux->fetchAll(PDO::FETCH_ASSOC);
+
+// Récupérer les informations vétérinaires pour chaque animal
+foreach ($animaux as &$animal) {
+    $animal_id = $animal['id'];
+    $requeteInfoVeto = $bdd->prepare('SELECT * FROM info_veterinaire WHERE animal_id = ?');
+    $requeteInfoVeto->execute([$animal_id]);
+    $info_veto = $requeteInfoVeto->fetch(PDO::FETCH_ASSOC);
+
+    // Ajouter les informations vétérinaires à l'animal correspondant
+    $animal['info_veterinaire'] = $info_veto;
+}
 ?>
 
 <!DOCTYPE html>
@@ -104,63 +41,81 @@ $animaux = $requeteAnimaux->fetchAll(PDO::FETCH_ASSOC);
             <div class="utilisateur">
                 <?php 
                 // Afficher l'identifiant de l'utilisateur et son rôle
-                echo "Identifiant: " . htmlspecialchars($_SESSION['identifiant']) . " | Rôle: " . htmlspecialchars($_SESSION['role']);
+                if (isset($_SESSION['identifiant']) && !empty($_SESSION['identifiant'])) {
+                    echo "Identifiant: " . htmlspecialchars($_SESSION['identifiant']) . " | Rôle: " . htmlspecialchars($_SESSION['role']);
+                    echo '<a href="deconnexion.php">Déconnexion</a>';
+                } else {
+                    echo '<a href="connexion.php">Connexion</a>';
+                }
                 ?>
-                <a href="deconnexion.php">Déconnexion</a>
             </div>
         </div>
     </header>
 
     <main>
+        <div class="d1"></div>
         <div class="animauxgrid">
             <!-- Affichage de tous les animaux -->
             <?php foreach($animaux as $animal): ?>
             <div class="animal">
+                <h3>Information sur l'animal</h3>
                 <?php if(isset($animal['image_a']) && !empty($animal['image_a'])): ?>
                 <img src="./images/<?php echo htmlspecialchars($animal['image_a']); ?>" alt="<?php echo htmlspecialchars($animal['race_a']); ?>">
                 <?php else: ?>
                 <img src="./images/default.jpg" alt="Image par défaut">
                 <?php endif; ?>
                 <ul>
-                <li><strong>Nom :</strong> <?php echo htmlspecialchars($animal['nom_a']); ?></li>
-                <li><strong>Race :</strong> <?php echo htmlspecialchars($animal['race_a']); ?></li>
-                <li><strong>Habitat :</strong> <?php echo htmlspecialchars($animal['habitat_a']); ?></li>
-                <li><strong>Description :</strong> <?php echo nl2br(htmlspecialchars($animal['description'])); ?></li>
+                    <li><strong>Nom :</strong> <?php echo htmlspecialchars($animal['nom_a']); ?></li>
+                    <li><strong>Race :</strong> <?php echo htmlspecialchars($animal['race_a']); ?></li>
+                    <li><strong>Habitat :</strong> <?php echo htmlspecialchars($animal['habitat_a']); ?></li>
+                    <li><strong>Description :</strong> <?php echo nl2br(htmlspecialchars($animal['description'])); ?></li>
+                    <h3>Information vétérinaire</h3>
+                    <!-- Affichage des informations vétérinaires s'il y en a -->
+                    <?php if (!empty($animal['info_veterinaire'])): ?>
+                        <hr>
+                        <li><strong>État :</strong> <?php echo htmlspecialchars($animal['info_veterinaire']['etat_animal']); ?></li>
+                        <li><strong>Nourriture :</strong> <?php echo htmlspecialchars($animal['info_veterinaire']['nourriture']); ?></li>
+                        <li><strong>Quantité nourriture :</strong> <?php echo htmlspecialchars($animal['info_veterinaire']['g_nourriture']); ?></li>
+                        <li><strong>Date de passage :</strong> <?php echo htmlspecialchars($animal['info_veterinaire']['date_passage']); ?></li>
+                        <li><strong>Détails :</strong> <?php echo nl2br(htmlspecialchars($animal['info_veterinaire']['detail_animal'])); ?></li>
+                    <?php endif; ?>
                 </ul>
-                <?php if($_SESSION['role'] !== 'admin' || $_SESSION['role'] !== 'veterinaire'): ?> 
-                <!-- Bouton de modification -->
-                <form method="GET" action="modifier_animal.php">
-                    <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>">
-                    <input type="submit" name="modifier" value="Modifier">
-                </form>
-                <form method="POST" action="supprimer_animal.php" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet animal ?');">
-    <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>">
-    <input type="submit" name="supprimer" value="Supprimer">
-</form>
+
+                <?php if(isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'veterinaire')): ?> 
+                    <!-- Boutons de modification et suppression pour les administrateurs et vétérinaires -->
+                    <form method="GET" action="modifier_animal.php">
+                        <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>">
+                        <input type="submit" name="modifier" value="Modifier">
+                    </form>
+                    <form method="POST" action="supprimer_animal.php" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet animal ?');">
+                        <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>">
+                        <input type="submit" name="supprimer" value="Supprimer">
+                    </form>
                 <?php endif; ?>
             </div>
-
             <?php endforeach; ?>
 
             <!-- Formulaire d'ajout d'animal -->
+            <?php if(isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'veterinaire')): ?> 
             <div class="ajout_animal">
                 <h2>Ajouter un animal</h2>
-                <form method="POST" action="" enctype="multipart/form-data">
+                <form method="POST" action="veterinaire.php" enctype="multipart/form-data">
                     <p><label>Nom : </label><input type="text" name="nom_a"></p>
                     <p><label>Race : </label><input type="text" name="race_a"></p>
-                    Habitat :
-                <select id="role-select" name="habitat_a">
-                    <option value="">--Veuillez choisir une option--</option>
-                    <option value="Savane">Savane</option>
-                    <option value="Prairie">Prairie</option>
-                    <option value="Foret">Foret</option>
-                    <option value="Toundra">Toundra</option>
-                </select>
+                    <p><label>Habitat : </label>
+                        <select name="habitat_a">
+                            <option value="Savane">Savane</option>
+                            <option value="Prairie">Prairie</option>
+                            <option value="Forêt">Forêt</option>
+                            <option value="Toundra">Toundra</option>
+                        </select>
+                    </p>
                     <p><label>Description : </label><textarea name="description"></textarea></p>
                     <p><label>Image : </label><input type="file" name="image_a"></p>
                     <input type="submit" name="envoi" value="Ajouter">
                 </form>
             </div>
+            <?php endif; ?>
         </div>
     </main>
 </body>
