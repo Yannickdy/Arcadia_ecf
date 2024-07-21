@@ -1,6 +1,5 @@
 <?php 
 session_start();
-echo "Identifiant: " . htmlspecialchars($_SESSION['identifiant']) . " | Rôle: " . htmlspecialchars($_SESSION['role']);
 ?>
 
 <!DOCTYPE html>
