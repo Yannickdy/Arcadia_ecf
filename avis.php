@@ -3,12 +3,22 @@ session_start();
 
 // Connexion à la base de données avec PDO
 try {
+    // Tentative de connexion à la première base de données locale
     $bdd = new PDO('mysql:host=localhost;dbname=zoo;charset=utf8;', 'root', '');
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
-}
+    echo "Connexion à la base de données locale réussie.";
+} catch(Exception $e) {
+    echo 'Erreur de connexion à la base de données locale : '.$e->getMessage()."\n";
 
+    try {
+        // Tentative de connexion à la deuxième base de données distante
+        $bdd = new PDO('mysql:host=gi6kn64hu98hy0b6.chr7pe7iynqr.eu-west-1.rds.amazonaws.com;dbname=xbjwdvj3c34v3ay1;charset=utf8;', 'fuxskjz01kufr48u', 'n5hb6h44og7ij4yc');
+        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "Connexion à la base de données distante réussie.";
+    } catch(Exception $e) {
+        die('Erreur de connexion à la base de données distante : '.$e->getMessage());
+    }
+}
 // Traitement de l'ajout d'un avis
 if (isset($_POST['submit'])) {
     if (!empty($_POST['pseudo']) && !empty($_POST['email']) && !empty($_POST['avis'])) {
