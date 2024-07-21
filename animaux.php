@@ -76,20 +76,24 @@ foreach ($animaux as &$animal) {
                         <li><strong>État :</strong> <?php echo htmlspecialchars($animal['info_veterinaire']['etat_animal']); ?></li>
                         <li><strong>Nourriture :</strong> <?php echo htmlspecialchars($animal['info_veterinaire']['nourriture']); ?></li>
                         <li><strong>Quantité nourriture :</strong> <?php echo htmlspecialchars($animal['info_veterinaire']['g_nourriture']); ?></li>
-                        <li><strong>Date de passage :</strong> <?php echo htmlspecialchars($animal['info_veterinaire']['date_passage']); ?></li>
+                        <li><strong>Date de passage :</strong> <?php echo htmlspecialchars(date("d/m/Y H:i:s", strtotime($animal['info_veterinaire']['date_passage']))); ?></li>
                         <li><strong>Détails :</strong> <?php echo nl2br(htmlspecialchars($animal['info_veterinaire']['detail_animal'])); ?></li>
                     <?php endif; ?>
                 </ul>
 
                 <?php if(isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'veterinaire')): ?> 
-                    <!-- Boutons de modification et suppression pour les administrateurs et vétérinaires -->
-                    <form method="GET" action="modifier_animal.php">
+                    <!-- Boutons de modification, suppression et redirection pour les administrateurs et vétérinaires -->
+                    <form method="GET" action="modifier_animal.php" style="display: inline;">
                         <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>">
                         <input type="submit" name="modifier" value="Modifier">
                     </form>
-                    <form method="POST" action="supprimer_animal.php" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet animal ?');">
+                    <form method="POST" action="supprimer_animal.php" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet animal ?');" style="display: inline;">
                         <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>">
                         <input type="submit" name="supprimer" value="Supprimer">
+                    </form>
+                    <form method="GET" action="veterinaire.php" style="display: inline;">
+                        <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>">
+                        <input type="submit" value="Page Vétérinaire">
                     </form>
                 <?php endif; ?>
             </div>

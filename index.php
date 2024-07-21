@@ -92,25 +92,70 @@ if(isset($_POST['update_horaires'])) {
             <h2>Présentation</h2>
             <div class="texte_presentation">
                 <img src='./images/pandaroux.jpg' alt=''>
-                <p>Bienvenue au Zoo Australien ! ...
+                <p>Bienvenue au Zoo Arcadia
+
+Situé en Bretagne, près de la forêt de Brocéliande, le zoo Arcadia vous invite à une aventure unique depuis 1960. Découvrez nos habitats diversifiés qui recréent des environnements naturels fascinants. Explorez la prairie, avec ses bisons et chevaux sauvages, la forêt dense où évoluent lynx et cerfs, la savane africaine peuplée de lions et girafes, et la toundra arctique abritant rennes et hiboux des neiges.
+
+Arcadia se consacre à la conservation et à l'éducation, offrant une expérience immersive et informative pour tous les âges. Venez vivre la magie de la nature dans un cadre enchâssé au cœur de la Bretagne !
                 </p>
             </div>
         </div>
 
         <div class="services">
-            <h2>Nos services</h2>
-            <details>
-                <summary>Services éducatifs</summary>
-                <ul>
-                    <li>Visites guidées : Accompagnées par des experts ou des guides.</li>
-                    <li>Programmes éducatifs : Ateliers pour enfants, conférences, et programmes scolaires.</li>
-                    <li>Panneaux d'information : Explications sur les animaux et leurs habitats.</li>
-                    <li>Centres d'interprétation : Expositions interactives et multimédias sur la faune et la conservation.</li>
-                </ul>
-            </details>
-            <!-- Autres services -->
-            <a href="services.php"><p>Vous pouvez voir tous les services que nous proposons en cliquant ici</p></a>
-        </div>
+                <h2>Nos services</h2>
+                <details>
+                    <summary>Services éducatifs</summary>
+                    <ul>
+                      <li>Visites guidées : Accompagnées par des experts ou des guides.</li>
+                      <li>Programmes éducatifs : Ateliers pour enfants, conférences, et programmes scolaires.</li>
+                      <li>Panneaux d'information : Explications sur les animaux et leurs habitats.</li>
+                      <li>Centres d'interprétation : Expositions interactives et multimédias sur la faune et la conservation.</li>
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>Activités et expériences</summary>
+                    <ul>
+                      <li>Rencontres avec les animaux : Séances de nourrissage, interactions directes avec certains animaux.</li>
+                      <li>Spectacles et démonstrations : Présentations de vol d'oiseaux, spectacles de dauphins, etc.</li>
+                      <li>Aires de jeux pour enfants : Espaces récréatifs thématiques pour les plus jeunes.</li>
+                      <li>Safaris en zoo : Tours en véhicules pour voir les animaux de plus près.</li>
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>Services de restauration</summary>
+                    <ul>
+                      <li>Restaurants et cafés : Options de restauration variées sur place.</li>
+                      <li>Aires de pique-nique : Espaces pour manger en plein air.</li>
+                      <li>Stands de collations : Ventes de glaces, boissons, snacks.</li>
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>Services de commodité</summary>
+                    <ul>
+                      <li>Boutiques de souvenirs : Ventes de peluches, livres, et autres articles liés aux animaux.</li>
+                      <li>Accès pour personnes handicapées : Chemins adaptés, fauteuils roulants disponibles.</li>
+                      <li>Aires de repos et bancs : Espaces pour se détendre.</li>
+                      <li>Services de toilettes et de change : Toilettes propres et espaces pour changer les bébés.</li>
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>Services de soutien</summary>
+                    <ul>
+                      <li>Personnel de sécurité : Surveillance pour assurer la sécurité des visiteurs.</li>
+                      <li>Infirmerie : Premiers soins en cas de besoin.</li>
+                      <li>Service de location de poussettes : Location de poussettes et chariots pour les jeunes enfants.</li>
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>Services pour la conservation</summary>
+                    <ul>
+                      <li>Programmes de conservation : Initiatives de reproduction et de protection des espèces menacées.</li>
+                      <li>Recherche scientifique : Collaboration avec des institutions pour des projets de recherche.</li>
+                      <li>Partenariats avec d'autres zoos et réserves naturelles : Échanges d'animaux et de connaissances pour la conservation.</li>
+                    </ul>
+                  </details>
+                  <a href="services.php"><p>Vous pouvez voir tous les services que nous proposons en cliquant ici</p></a>
+            </div>
 
         <div class="habitat">
             <h2>Habitat</h2>

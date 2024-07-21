@@ -1,5 +1,16 @@
 <?php
 session_start();
+$bdd = new PDO('mysql:host=localhost;dbname=zoo;charset=utf8', 'root', '');
+
+// Récupérer les informations sur les animaux en fonction de l'habitat sélectionné
+$habitat = $_GET['habitat'] ?? ''; // Assurez-vous que l'habitat est fourni via une requête GET
+$animaux = [];
+
+if ($habitat) {
+    $requeteAnimaux = $bdd->prepare('SELECT * FROM animaux WHERE habitat_a = ?');
+    $requeteAnimaux->execute([$habitat]);
+    $animaux = $requeteAnimaux->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +20,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="habitat_style.css">
     <link rel="stylesheet" href="all.css">
-    <title>Document</title>
+    <title>Habitat</title>
 </head>
 <body>
     <header>
@@ -39,51 +50,31 @@ session_start();
     <main>
         <div class="d1"></div>
         <div class="habitat">
-            <div class='habitsavane'><img src='./images/savane.jpg' alt='savane' data-info="savane-info"></div>
-            <div class='habitforet'><img src='./images/foret.jpg' alt='foret' data-info="foret-info"></div>
-            <div class='prairie'><img src='./images/prairie.jpeg' alt='prairie' data-info="prairie-info"></div>
-            <div class='habittoundra'><img src='./images/toundra.jpg' alt='toundra' data-info="toundra-info"></div>
+            <div class='habitsavane'><a href="?habitat=Savane"><img src='./images/savane.jpg' alt='savane'></a></div>
+            <div class='habitforet'><a href="?habitat=Forêt"><img src='./images/foret.jpg' alt='foret'></a></div>
+            <div class='prairie'><a href="?habitat=Prairie"><img src='./images/prairie.jpeg' alt='prairie'></a></div>
+            <div class='habittoundra'><a href="?habitat=Toundra"><img src='./images/toundra.jpg' alt='toundra'></a></div>
         </div>
-        <div id="savane-info" class="info-section">
-            <h2>Savane</h2>
-            <img src='./images/savane.jpg' alt='savane'>
-            <p>Description de la savane.</p>
-            <ul>
-                <li>Lion</li>
-                <li>Éléphant</li>
-                <li>Zèbre</li>
-            </ul>
-        </div>
-        <div id="foret-info" class="info-section">
-            <h2>Forêt</h2>
-            <img src='./images/foret.jpg' alt='foret'>
-            <p>Description de la forêt.</p>
-            <ul>
-                <li>Ours</li>
-                <li>Cerf</li>
-                <li>Renard</li>
-            </ul>
-        </div>
-        <div id="prairie-info" class="info-section">
-            <h2>Prairie</h2>
-            <img src='./images/prairie.jpeg' alt='prairie'>
-            <p>Description de la prairie.</p>
-            <ul>
-                <li>Bison</li>
-                <li>Antilope</li>
-                <li>Renard des prairies</li>
-            </ul>
-        </div>
-        <div id="toundra-info" class="info-section">
-            <h2>Toundra</h2>
-            <img src='./images/toundra.jpg' alt='toundra'>
-            <p>Description de la toundra.</p>
-            <ul>
-                <li>Caribou</li>
-                <li>Ours polaire</li>
-                <li>Renard arctique</li>
-            </ul>
-        </div>
+
+        <?php if ($habitat && $animaux): ?>
+            <div class="animaux-info">
+                <h2>Animaux de la <?= htmlspecialchars($habitat); ?></h2>
+                <div class="animaux-container">
+                    <?php foreach ($animaux as $animal): ?>
+                        <div class="animal">
+                            <div class="animal-img">
+                                <img src="./images/<?php echo htmlspecialchars($animal['image_a']); ?>" alt="<?php echo htmlspecialchars($animal['nom_a']); ?>">
+                            </div>
+                            <div class="animal-details">
+                                <p><strong>Nom :</strong> <?php echo htmlspecialchars($animal['nom_a']); ?></p>
+                                <p><strong>Race :</strong> <?php echo htmlspecialchars($animal['race_a']); ?></p>
+                                <p><strong>Description :</strong> <?php echo nl2br(htmlspecialchars($animal['description'])); ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
     </main>
     <script src="script_habitat.js"></script>
 </body>
