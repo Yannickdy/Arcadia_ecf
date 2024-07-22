@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (!isset($bdd)) {
     $connected = false;
@@ -23,23 +23,24 @@ if (!isset($bdd)) {
     }
 } 
 
-    if(isset($_GET['id']) AND !empty($_GET['id'])){
-        $recupID = $_GET['id'];
-        $recupUser = $bdd ->prepare('SELECT * FROM membres WHERE id = ?');
-        $recupUser ->execute(array($recupID));
-        if($recupUser->rowCount() > 0){
-            $bannirUser = $bdd ->prepare('DELETE FROM membres WHERE id = ?');
-            $bannirUser->execute(array($recupID));
-            header('Location: admin.php');
-            exit();
-            
-        } else{
-            echo "Aucun membre n'a été trouvé";
-        }
+// Vérifier que l'utilisateur est connecté et a les droits nécessaires
+if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'veterinaire')) {
+    header('Location: index.php');
+    exit();
+}
 
-    }else{
-        echo "L'identifiant n'a pas été récupéré";
-    }
-
-    ?>
-
+// Vérifier si l'ID de l'information vétérinaire est fourni
+if (isset($_POST['info_veto_id'])) {
+    $info_veto_id = intval($_POST['info_veto_id']);
+    
+    // Supprimer l'information vétérinaire
+    $requete = $bdd->prepare('DELETE FROM info_veterinaire WHERE id = ?');
+    $requete->execute([$info_veto_id]);
+    
+    header('Location: veterinaire.php');
+    exit();
+} else {
+    header('Location: veterinaire.php');
+    exit();
+}
+?>

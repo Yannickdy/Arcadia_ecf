@@ -17,37 +17,130 @@
     border: 2px solid #333;
 }
 
-.info-section {
-    display: none;
+.animaux-info {
     padding: 20px;
-    border-top: 2px solid #333;
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 10px; 
+    margin: 20px 0; 
+}
+
+.animaux-info h2 {
     text-align: center;
+    margin-bottom: 20px; 
 }
 
-.info-section.active {
-    display: block;
+.animaux-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.info-section img {
-    width: 50%;
-    height: auto;
-    margin: 0 auto;
-    display: block;
+.animal {
+    display: flex; 
+    align-items: center; 
+    border: 1px solid #ddd; 
+    border-radius: 10px; 
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    gap: 15px;
+    width: 45%;
 }
 
-.info-section ul {
-    text-align: center; 
-    padding-left: 0; 
+.animal-img {
+    flex-shrink: 0; /* Empêche l'image de se réduire */
 }
 
-.info-section ul li {
-    display: inline-block; 
-    text-align: left; 
-    margin-left: auto; 
-    margin-right: auto; 
-    list-style-type: none; 
-    padding: 5px 10px; 
-    border: 1px solid #ccc;
+.animal-img img {
+    width: 150px; 
+    height: auto; 
     border-radius: 5px; 
-    background-color: #f0f0f0; 
+    border: 1px solid #ccc; 
+}
+
+.animal-details {
+    text-align: left;
+    width: 100%; 
+}
+
+.animal-details p {
+    margin: 10px 0; 
+}
+
+/* Media Queries pour adapter le design aux différentes tailles d'écran */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .habitat {
+        justify-content: space-between;
+    }
+
+    .habitat img {
+        width: 180px;
+        height: 135px;
+    }
+
+    .animal {
+        width: calc(50% - 10px); 
+    }
+
+    .animal-img img {
+        width: 140px; 
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .habitat img {
+        width: 160px;
+        height: 120px;
+    }
+
+    .animal {
+        width: calc(50% - 10px); 
+    }
+
+    .animal-img img {
+        width: 130px; 
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    .habitat img {
+        width: 140px;
+        height: 105px;
+    }
+
+    .animal {
+        width: calc(50% - 10px); 
+    }
+
+    .animal-img img {
+        width: 120px; 
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .habitat {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+    .habitat img {
+        width: 120px;
+        height: 90px;
+    }
+
+    .animal {
+        width: 100%; 
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+
+    .animal-img {
+        margin-bottom: 10px; 
+    }
+
+    .animal-img img {
+        width: 100px; 
+    }
 }

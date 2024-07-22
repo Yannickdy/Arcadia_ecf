@@ -1,6 +1,27 @@
 <?php 
 session_start();
-$bdd = new PDO('mysql:host=localhost;dbname=zoo;charset=utf8;', 'root', '');
+if (!isset($bdd)) {
+    $connected = false;
+
+    try {
+        // Tentative de connexion à la première base de données locale
+        $bdd = new PDO('mysql:host=localhost;dbname=zoo;charset=utf8', 'root', '');
+        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $connected = true;
+    } catch(Exception $e) {
+        echo 'Erreur de connexion à la base de données locale : '.$e->getMessage()."\n";
+    }
+
+    if (!$connected) {
+        try {
+            // Tentative de connexion à la deuxième base de données distante
+            $bdd = new PDO('mysql:host=gi6kn64hu98hy0b6.chr7pe7iynqr.eu-west-1.rds.amazonaws.com;dbname=xbjwdvj3c34v3ay1;charset=utf8', 'fuxskjz01kufr48u', 'n5hb6h44og7ij4yc');
+            $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch(Exception $e) {
+            die('Erreur de connexion à la base de données distante : '.$e->getMessage());
+        }
+    }
+} 
 
 // Vérifier si l'utilisateur est connecté
 if(!isset($_SESSION['identifiant']) || empty($_SESSION['identifiant'])) {
@@ -85,6 +106,7 @@ if(isset($_POST['modification'])) {
 
     <main>
         <div class="modifier_animal">
+<<<<<<< HEAD
             <h2>Modifier l'animal</h2>
             <?php if($modifAnimal): ?>
             <form method="POST" action="">
@@ -96,6 +118,23 @@ if(isset($_POST['modification'])) {
                 <input type="submit" name="modification" value="Enregistrer les modifications">
             </form>
             <?php endif; ?>
+=======
+            <h2>Modifier un animal</h2>
+            <form method="POST" action="">
+                <p><label>Nom : </label><input type="text" name="nom_a" value="<?php echo htmlspecialchars($animal['nom_a']); ?>"></p>
+                <p><label>Race : </label><input type="text" name="race_a" value="<?php echo htmlspecialchars($animal['race_a']); ?>"></p>
+                Habitat :
+                <select id="role-select" name="habitat_a">
+                    <option value="">--Veuillez choisir une option--</option>
+                    <option value="Savane" <?php if($animal['habitat_a'] == 'Savane') echo 'selected'; ?>>Savane</option>
+                    <option value="Prairie" <?php if($animal['habitat_a'] == 'Prairie') echo 'selected'; ?>>Prairie</option>
+                    <option value="Foret" <?php if($animal['habitat_a'] == 'Foret') echo 'selected'; ?>>Foret</option>
+                    <option value="Toundra" <?php if($animal['habitat_a'] == 'Toundra') echo 'selected'; ?>>Toundra</option>
+                </select>
+                <p><label>Description : </label><textarea name="description"><?php echo htmlspecialchars($animal['description']); ?></textarea></p>
+                <input type="submit" name="modification" value="Modifier">
+            </form>
+>>>>>>> dev
         </div>
     </main>
 </body>
